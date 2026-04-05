@@ -6,6 +6,9 @@ import StatsSection from "./components/StatsSection";
 import ProductsSection from "./components/ProductsSection";
 import CartSection from "./components/CartSection";
 import ToggleSection from "./components/ToggleSection";
+import StepsSection from "./components/StepsSection";
+import PricingSection from "./components/PricingSection";
+import Footer from "./components/Footer";
 
 function App() {
   const [activeView, setActiveView] = useState("products");
@@ -50,7 +53,12 @@ function App() {
             onProceedToCheckout={handleProceedToCheckout}
           />
         )}
+
+        <StepsSection />
+        <PricingSection />
       </div>
+
+      <Footer />
     </div>
   );
 }
