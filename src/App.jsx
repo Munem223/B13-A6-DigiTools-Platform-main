@@ -1,5 +1,8 @@
 import { useState } from "react";
 import products from "./data/products";
+import Navbar from "./components/Navbar";
+import Banner from "./components/Banner";
+import StatsSection from "./components/StatsSection";
 
 function App() {
   const [activeView, setActiveView] = useState("products");
@@ -7,9 +10,11 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold mt-10">DigiTools</h1>
+      <Navbar cartCount={cartItems.length} />
+      <Banner />
+      <StatsSection />
 
-      <div className="container-custom mt-8">
+      <div className="container-custom mt-10 pb-10">
         <p className="text-center">Products: {products.length}</p>
         <p className="text-center">Cart Items: {cartItems.length}</p>
         <p className="text-center">Active View: {activeView}</p>
