@@ -15,7 +15,7 @@ function CartIcon() {
   );
 }
 
-function Navbar({ cartCount }) {
+function Navbar({ cartCount, onCartClick }) {
   return (
     <nav className="bg-white sticky top-0 z-50 border-b border-gray-100">
       <div className="container-custom py-4 flex items-center justify-between">
@@ -26,14 +26,25 @@ function Navbar({ cartCount }) {
         </div>
 
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#steps">How it Works</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#products">Products</a>
+          </li>
+          <li>
+            <a href="#steps">How it Works</a>
+          </li>
+          <li>
+            <a href="#pricing">Pricing</a>
+          </li>
         </ul>
 
         <div className="flex items-center gap-4">
-          <button className="relative flex items-center justify-center w-11 h-11 rounded-full border border-gray-200 text-gray-700">
+          <button
+            onClick={onCartClick}
+            className="relative flex items-center justify-center w-11 h-11 rounded-full border border-gray-200 text-gray-700"
+          >
             <CartIcon />
             <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs font-bold min-w-[20px] h-5 rounded-full flex items-center justify-center px-1">
               {cartCount}

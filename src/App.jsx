@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import products from "./data/products";
 import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
@@ -17,28 +20,46 @@ function App() {
   const handleAddToCart = (product) => {
     const exists = cartItems.find((item) => item.id === product.id);
 
-    if (!exists) {
-      setCartItems([...cartItems, product]);
+    if (exists) {
+      toast.info(`${product.name} is already in cart`);
+      return;
     }
+
+    setCartItems([...cartItems, product]);
+    toast.success(`${product.name} added to cart`);
   };
 
   const handleRemoveFromCart = (id) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCart);
+    toast.error("Product removed from cart");
   };
 
   const handleProceedToCheckout = () => {
+    if (cartItems.length === 0) {
+      toast.info("Cart is already empty");
+      return;
+    }
+
     setCartItems([]);
+    toast.success("Proceed to checkout successful");
   };
 
   return (
     <div>
-      <Navbar cartCount={cartItems.length} />
+      <Navbar
+        cartCount={cartItems.length}
+        onCartClick={() => setActiveView("cart")}
+      />
+
       <Banner />
       <StatsSection />
 
-      <div className="container-custom">
-        <ToggleSection activeView={activeView} setActiveView={setActiveView} />
+      <main className="container-custom">
+        <ToggleSection
+          activeView={activeView}
+          setActiveView={setActiveView}
+        />
 
         {activeView === "products" ? (
           <ProductsSection
@@ -56,9 +77,11 @@ function App() {
 
         <StepsSection />
         <PricingSection />
-      </div>
+      </main>
 
       <Footer />
+
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 }
